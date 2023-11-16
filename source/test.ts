@@ -11,6 +11,11 @@ kava.suite('@bevry/fs-readable', function (suite, test) {
 		;(async function () {
 			equal(await isReadable(file), true, 'file is readable')
 			equal(await isReadable(dir), true, 'dir is readable')
+			equal(
+				await isReadable([file, dir]),
+				true,
+				'file and dir are both readable'
+			)
 			equal(await isReadable('missing'), false, 'missing file is not readable')
 		})()
 			.then(() => done())
@@ -20,6 +25,7 @@ kava.suite('@bevry/fs-readable', function (suite, test) {
 		;(async function () {
 			await readable(file)
 			await readable(dir)
+			await readable([file, dir])
 		})()
 			.then(() => done())
 			.catch((err: any) => done(err))
